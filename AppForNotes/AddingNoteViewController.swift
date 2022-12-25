@@ -15,26 +15,23 @@ class AddingNoteViewController: UIViewController {
         
         navigationItem.backButtonDisplayMode = .minimal
         
-        configureTextField()
+        configureTextView()
     }
     
-    func configureTextField() {
-        let textField = UITextField()
-        textField.font = .systemFont(ofSize: 15)
-        textField.placeholder = "Enter the text"
-        textField.borderStyle = .roundedRect
-        textField.autocorrectionType = .yes
-        textField.keyboardType = .default
-        textField.returnKeyType = .done
-        textField.clearButtonMode = .whileEditing
-        textField.contentVerticalAlignment = .top
+    func configureTextView() {
+        let textView = UITextView()
+        textView.font = .systemFont(ofSize: 15)
+        textView.autocorrectionType = .yes
+        textView.keyboardType = .default
+        textView.returnKeyType = .done
+        textView.textAlignment = .right
             
-        self.view.addSubview(textField)
+        self.view.addSubview(textView)
             
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([textField.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-                                     textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-                                     textField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
-                                     textField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor)])
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([textView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+                                     textView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+                                     textView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+                                     textView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor)])
     }
 }
