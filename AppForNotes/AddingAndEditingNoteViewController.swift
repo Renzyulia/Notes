@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class AddingNoteViewController: UIViewController {
+class AddingAndEditingNoteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +18,7 @@ class AddingNoteViewController: UIViewController {
         configureTextView()
     }
     
-    func configureTextView() {
+    private func configureTextView() {
         let textView = UITextView()
         textView.font = .systemFont(ofSize: 15)
         textView.autocorrectionType = .yes
@@ -26,7 +26,7 @@ class AddingNoteViewController: UIViewController {
         textView.returnKeyType = .done
         textView.textAlignment = .right
             
-        self.view.addSubview(textView)
+        view.addSubview(textView)
             
         textView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([textView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),

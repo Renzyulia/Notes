@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A314CCAB29585CD900B30190 /* AddingNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A314CCAA29585CD900B30190 /* AddingNoteViewController.swift */; };
+		A314CCAB29585CD900B30190 /* AddingAndEditingNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A314CCAA29585CD900B30190 /* AddingAndEditingNoteViewController.swift */; };
 		A368FBB22955C37600108FAF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A368FBB12955C37600108FAF /* AppDelegate.swift */; };
 		A368FBB42955C37600108FAF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A368FBB32955C37600108FAF /* SceneDelegate.swift */; };
 		A368FBB62955C37600108FAF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A368FBB52955C37600108FAF /* ViewController.swift */; };
@@ -17,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A314CCAA29585CD900B30190 /* AddingNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingNoteViewController.swift; sourceTree = "<group>"; };
+		A314CCAA29585CD900B30190 /* AddingAndEditingNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingAndEditingNoteViewController.swift; sourceTree = "<group>"; };
 		A368FBAE2955C37600108FAF /* AppForNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppForNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A368FBB12955C37600108FAF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A368FBB32955C37600108FAF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,7 +61,7 @@
 				A368FBB12955C37600108FAF /* AppDelegate.swift */,
 				A368FBB32955C37600108FAF /* SceneDelegate.swift */,
 				A368FBB52955C37600108FAF /* ViewController.swift */,
-				A314CCAA29585CD900B30190 /* AddingNoteViewController.swift */,
+				A314CCAA29585CD900B30190 /* AddingAndEditingNoteViewController.swift */,
 				A368FBB72955C37600108FAF /* Main.storyboard */,
 				A368FBBA2955C37700108FAF /* Assets.xcassets */,
 				A368FBBC2955C37700108FAF /* LaunchScreen.storyboard */,
@@ -142,7 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A368FBB62955C37600108FAF /* ViewController.swift in Sources */,
-				A314CCAB29585CD900B30190 /* AddingNoteViewController.swift in Sources */,
+				A314CCAB29585CD900B30190 /* AddingAndEditingNoteViewController.swift in Sources */,
 				A368FBB22955C37600108FAF /* AppDelegate.swift in Sources */,
 				A368FBB42955C37600108FAF /* SceneDelegate.swift in Sources */,
 			);
