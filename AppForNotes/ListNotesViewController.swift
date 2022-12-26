@@ -54,8 +54,8 @@ class ListNotesViewController: UIViewController {
     }
     
     @objc private func add() {
-        let addingNoteViewController = AddingNoteViewController()
-        self.navigationController?.pushViewController(addingNoteViewController, animated: true)
+        let addingAndEditingNoteViewController = addingAndEditingNoteViewController()
+        self.navigationController?.pushViewController(addingAndEditingNoteViewController, animated: true)
     }
 }
 
@@ -76,7 +76,7 @@ extension ListNotesViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let editingNoteViewController = EditingNoteViewController()
-        self.navigationController?.pushViewController(editingNoteViewController, animated: true)
+        let addingAndEditingNoteViewController = AddingAndEditingNoteViewController()
+        self.navigationController?.pushViewController(addingAndEditingNoteViewController, animated: true)
     }
 }
