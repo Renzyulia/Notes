@@ -8,13 +8,14 @@
 import Foundation
 import UIKit
 
-class AddingAndEditingNoteViewController: UIViewController {
+final class AddingAndEditingNoteViewController: UIViewController {
     let note: Note
+    
     private let textView = UITextView()
     
     init(note: Note) {
-      self.note = note
-      super.init(nibName: nil, bundle: nil)
+        self.note = note
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -32,9 +33,9 @@ class AddingAndEditingNoteViewController: UIViewController {
         
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
         let context = CoreData.shared.viewContext
         note.correctText = textView.attributedText
         note.date = Date()
@@ -54,9 +55,9 @@ class AddingAndEditingNoteViewController: UIViewController {
         textView.keyboardType = .default
         textView.returnKeyType = .done
         textView.textAlignment = .left
-            
+        
         view.addSubview(textView)
-            
+        
         textView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([textView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
                                      textView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),

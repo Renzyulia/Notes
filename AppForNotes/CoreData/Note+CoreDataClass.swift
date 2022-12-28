@@ -6,7 +6,7 @@
 //
 //
 
-import Foundation
+import UIKit
 import CoreData
 
 @objc(Note)
@@ -27,4 +27,10 @@ public class Note: NSManagedObject {
             )
         }
    }
+    
+    convenience init(context: NSManagedObjectContext, note: String, date: Date) {
+        self.init(context: context)
+        correctText = NSAttributedString(string: note, attributes: [.font: UIFont(name: "Helvetica", size: 18)!])
+        self.date = date
+    }
 }
