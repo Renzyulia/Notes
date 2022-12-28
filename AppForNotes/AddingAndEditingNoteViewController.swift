@@ -10,7 +10,7 @@ import UIKit
 
 class AddingAndEditingNoteViewController: UIViewController {
     let note: Note
-    let textView = UITextView()
+    private let textView = UITextView()
     
     init(note: Note) {
       self.note = note
@@ -28,15 +28,17 @@ class AddingAndEditingNoteViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .black
         
         configureTextView()
+        customMenu()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     
         let context = CoreData.shared.viewContext
-        note.text = textView.text
+        note.correctText = textView.attributedText
         note.date = Date()
-        if note.text! == "" {
+        if textView.attributedText.string == " " {
             context.delete(note)
         }
         do {
@@ -47,10 +49,7 @@ class AddingAndEditingNoteViewController: UIViewController {
     }
     
     private func configureTextView() {
-        if note.text != nil {
-            textView.text = note.text
-        }
-        textView.font = .systemFont(ofSize: 18)
+        textView.attributedText = note.correctText
         textView.autocorrectionType = .yes
         textView.keyboardType = .default
         textView.returnKeyType = .done
@@ -63,5 +62,39 @@ class AddingAndEditingNoteViewController: UIViewController {
                                      textView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
                                      textView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
                                      textView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor)])
+    }
+    
+    private func customMenu() {
+        let bold = UIMenuItem(title: "Bold", action: #selector(makeFontBold))
+        let italics = UIMenuItem(title: "Italics", action: #selector(makeFontItalics))
+        let underline = UIMenuItem(title: "Underline", action: #selector(makeFontUnderlined))
+        UIMenuController.shared.menuItems = [bold, italics, underline]
+    }
+    
+    @objc private func makeFontBold() {
+        let range = textView.selectedRange
+        let string = NSMutableAttributedString(attributedString: textView.attributedText)
+        let boldAttribute = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)]
+        string.addAttributes(boldAttribute, range: textView.selectedRange)
+        textView.attributedText = string
+        textView.selectedRange = range
+    }
+    
+    @objc private func makeFontItalics() {
+        let range = textView.selectedRange
+        let string = NSMutableAttributedString(attributedString: textView.attributedText)
+        let italicsAttribute = [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 18)]
+        string.addAttributes(italicsAttribute, range: textView.selectedRange)
+        textView.attributedText = string
+        textView.selectedRange = range
+    }
+    
+    @objc private func makeFontUnderlined() {
+        let range = textView.selectedRange
+        let string = NSMutableAttributedString(attributedString: textView.attributedText)
+        let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue]
+        string.addAttributes(underlineAttribute, range: textView.selectedRange)
+        textView.attributedText = string
+        textView.selectedRange = range
     }
 }

@@ -17,7 +17,7 @@ class ListNotesViewController: UIViewController, NSFetchedResultsControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+        view.backgroundColor = .lightGray
         navigationItem.title = "Notes"
         navigationItem.backButtonDisplayMode = .minimal
         
@@ -46,7 +46,7 @@ class ListNotesViewController: UIViewController, NSFetchedResultsControllerDeleg
 
     private func configureTableView() {
         contentTableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
-        contentTableView.backgroundColor = .clear
+        contentTableView.backgroundColor = .white
         contentTableView.dataSource = self
         contentTableView.delegate = self
       
@@ -64,7 +64,8 @@ class ListNotesViewController: UIViewController, NSFetchedResultsControllerDeleg
         addNoteButton.setImage(UIImage(named: "Icon"), for: .normal)
         addNoteButton.imageView?.layer.transform = CATransform3DMakeScale(0.4, 0.4, 0.4)
         addNoteButton.setTitleColor(.white, for: .normal)
-        addNoteButton.layer.cornerRadius = addNoteButton.frame.height * 0.5
+        addNoteButton.frame = CGRect(x: 100, y: 100, width: 75, height: 75)
+        addNoteButton.layer.cornerRadius = 0.5 * addNoteButton.bounds.size.width
         addNoteButton.layer.masksToBounds = true
         addNoteButton.backgroundColor = .lightGray
         addNoteButton.addTarget(self, action: #selector(add), for: .touchUpInside)
@@ -82,6 +83,7 @@ class ListNotesViewController: UIViewController, NSFetchedResultsControllerDeleg
         let context = CoreData.shared.viewContext
         let object = Note(context: context)
         let note = object
+        note.correctText = NSAttributedString(string: " ", attributes: [.font: UIFont(name: "Helvetica", size: 18)!])
         do {
             try context.save()
         } catch {
@@ -116,7 +118,7 @@ extension ListNotesViewController: UITableViewDataSource {
         }
         
         var content = cell.defaultContentConfiguration()
-        content.text = object.text
+        content.text = object.correctText.string
         cell.contentConfiguration = content
         
         return cell
@@ -165,14 +167,31 @@ extension ListNotesViewController: UITableViewDelegate {
 class CoreData {
     static let shared = CoreData()
     private init () {}
-  
+
     lazy private var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "ModelCoreData")
-        container.loadPersistentStores(completionHandler: { (StoreDescription, error) in
-          if let error = error as NSError? {
-            fatalError("Unresolved error \(error), \(error.userInfo)")
-          }
-        })
+        if FileManager.default.fileExists(atPath: container.persistentStoreDescriptions[0].url!.path) {
+            container.loadPersistentStores(completionHandler: { (StoreDescription, error) in
+              if let error = error as NSError? {
+              fatalError("Unresolved error \(error), \(error.userInfo)")
+              }
+            })
+        } else {
+            container.loadPersistentStores(completionHandler: { (StoreDescription, error) in
+              if let error = error as NSError? {
+              fatalError("Unresolved error \(error), \(error.userInfo)")
+              }
+            })
+            let context = container.viewContext
+            let object = Note(context: context)
+            object.correctText = NSAttributedString(string: "Welcome to Notes!", attributes: [.font: UIFont(name: "Helvetica", size: 18)!])
+            object.date = Date()
+            do {
+                try context.save()
+            } catch {
+                fatalError("cannot save the object")
+            }
+        }
         return container
     }()
   
